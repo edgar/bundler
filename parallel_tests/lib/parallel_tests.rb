@@ -27,10 +27,11 @@ module ParallelTests
           # Pids object should be created before threads will start adding pids to it
           # Otherwise we would have to use Mutex to prevent creation of several instances
           @pids = pids
-          yield
+          result = yield
           puts "PARALLEL_PID_FILE being restored from #{caller_locations.join("\n")}"
           ENV['PARALLEL_PID_FILE'] = nil
           @pids = nil
+          result
         end
       end
     end
