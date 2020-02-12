@@ -24,9 +24,6 @@ module ParallelTests
       Tempfile.open('parallel_tests-pidfile') do |f|
         begin
           ENV['PARALLEL_PID_FILE'] = f.path
-          TracePoint.trace(:line) do |tp|
-            raise "Reset at #{tp.path}:#{tp.lineno}" if ENV["PARALLEL_PID_FILE"].nil?
-          end
           # Pids object should be created before threads will start adding pids to it
           # Otherwise we would have to use Mutex to prevent creation of several instances
           @pids = pids
