@@ -23,7 +23,6 @@ module ParallelTests
     def with_pid_file
       Tempfile.open('parallel_tests-pidfile') do |f|
         begin
-          puts "PARALLEL_PID_FILE being set to #{f.path} from #{caller_locations.join("\n")}"
           ENV['PARALLEL_PID_FILE'] = f.path
           # Pids object should be created before threads will start adding pids to it
           # Otherwise we would have to use Mutex to prevent creation of several instances
@@ -41,11 +40,6 @@ module ParallelTests
     end
 
     def pid_file_path
-      if ENV["PARALLEL_PID_FILE"].nil?
-        puts "PARALLEL_PID_FILE being fetched but not available from #{caller_locations.join("\n")}"
-      else
-        puts "PARALLEL_PID_FILE being fetched from #{caller_locations.join("\n")}"
-      end
       ENV.fetch('PARALLEL_PID_FILE')
     rescue => e
       puts e.message
