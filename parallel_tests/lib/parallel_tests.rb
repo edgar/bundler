@@ -42,9 +42,6 @@ module ParallelTests
 
     def pid_file_path
       ENV.fetch('PARALLEL_PID_FILE')
-    rescue => e
-      puts e.message
-      raise
     end
 
     def stop_all_processes
