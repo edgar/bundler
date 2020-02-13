@@ -82,7 +82,6 @@ module ParallelTests
         report_time_taken(&run_tests_proc)
       end
 
-      puts "test_results.nil?: #{test_results.nil?}"
       abort final_fail_message if any_test_failed?(test_results)
     end
 
